@@ -92,20 +92,24 @@
                 class="top-[-60px] flex flex-col items-center xl:items-start relative sm:top-[-155px] left-[-205px] xl:top-0 xl:left-0">
                 <div class="flex flex-col items-center xl:items-start">
                     <p class="text-[15px] font-[inter] text-[#94a3b8] sm:text-[20px] pb-[8px] font-bold">Hi, I am</p>
-                    <p class="text-[20px] mb:text-[25px] font-[cherry_cream_soda] text-white sm:text-[35px] pb-[8px]">
+                    <p class="text-[20px] md:text-[25px] font-[cherry_cream_soda] text-white sm:text-[35px] pb-[8px]">
                         Muhammad Humayun
                     </p>
-                    <p
-                        class="text-[15px] bg-gradient-to-r from-[#4db4f9] to-[#b688fb] bg-clip-text text-transparent sm:text-[20px] font-[inter] font-extrabold pb-[8px]">
-                        Front-end Developer</p>
+                    <p class="text-[15px] sm:text-[20px] font-[inter] font-extrabold pb-[8px]">
+                        <span id="role"
+                            class="bg-gradient-to-r from-[#4db4f9] to-[#b688fb] bg-clip-text text-transparent"></span>
+
+                        <span
+                            class="bg-gradient-to-r from-[#4db4f9] to-[#b688fb] bg-clip-text text-transparent animate-pulse">|</span>
+                    </p>
                     <p class="text-[15px] font-[inter] text-[#94a3b8] sm:text-[20px] w-[70%] text-center xl:text-start">
                         I build modern, responsive and user-friendly websites with clean code and great user experience
                     </p>
                 </div>
                 <div class="flex mt-[30px]">
                     <div class="w-[50px] mr-[20px] p-[13px] rounded-[50px] bg-[#2a2a58]">
-                        <a href="https://mail.google.com/" target="_blank"><img
-                                src="./Icons/email-open-svgrepo-com.svg" alt=""></a>
+                        <a href="https://mail.google.com/" target="_blank"><img src="./Icons/email-open-svgrepo-com.svg"
+                                alt=""></a>
                     </div>
                     <div class="w-[50px] mr-[20px] p-[13px] rounded-[50px] bg-[#2a2a58]">
                         <a href="https://github.com/HumayunCoder" target="_blank"><img
@@ -652,6 +656,52 @@
         duration: 800,
         once: false,
     });
+</script>
+<script>
+    const roles = [
+        "Frontend Engineer",
+        "Web Developer",
+        "React Developer"
+    ];
+
+    const role = document.getElementById("role");
+
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeEffect() {
+
+        const currentRole = roles[roleIndex];
+
+        if (!deleting) {
+            role.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
+
+            if (charIndex === currentRole.length) {
+                deleting = true;
+
+                setTimeout(typeEffect, 1500);
+                return;
+            }
+
+        } else {
+            role.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+
+            if (charIndex === 0) {
+                deleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+
+                setTimeout(typeEffect, 500);
+                return;
+            }
+        }
+
+        setTimeout(typeEffect, deleting ? 60 : 100);
+    }
+
+    typeEffect();
 </script>
 
 </html>
